@@ -14,7 +14,12 @@ private fun checkPositiveNumber(s: Int): Int {
 
 private fun extractDelimiter(input: String): Pair<String, String> {
     return when {
-        input.startsWith("//") -> Pair(input.substring(2, 3), input.substring(4))
+        input.startsWith("//[") -> {
+            val endBracket = input.indexOf("]")
+            Pair(input.substring(3, endBracket), input.substring(endBracket + 2))
+        }
+        input.startsWith("//") ->
+            Pair(input.substring(2, 3), input.substring(4))
         else -> Pair(",", input)
     }
 }
