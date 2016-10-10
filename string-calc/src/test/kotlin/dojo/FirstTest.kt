@@ -10,11 +10,7 @@ import org.junit.Test
 
 class FirstTest {
 
-    private val stringCalculator: StringCalculator
-        get() {
-            val calculator = StringCalculator()
-            return calculator
-        }
+    private val stringCalculator = StringCalculator()
 
     @Test
     fun testThatEmptyStringReturnsZero() {
