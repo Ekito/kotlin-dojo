@@ -3,9 +3,6 @@ buildscript {
         kotlinVersion = '1.0.4'
     }
     repositories {
-        maven {
-            url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1'
-        }
         mavenCentral()
     }
     dependencies {
@@ -24,8 +21,6 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-
     testCompile('junit:junit:4.12')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
