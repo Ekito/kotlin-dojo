@@ -10,39 +10,50 @@ import org.junit.Test
 
 class FirstTest {
 
+    private val stringCalculator: StringCalculator
+        get() {
+            val calculator = StringCalculator()
+            return calculator
+        }
+
     @Test
     fun testThatEmptyStringReturnsZero() {
-        val calculator = StringCalculator()
-        Assert.assertEquals(0, calculator.sum(""))
+        Assert.assertEquals(0, stringCalculator.sum(""))
     }
 
     @Test
     fun testThatSingleNumberReturnsItsvalue() {
-        val calculator = StringCalculator()
-        Assert.assertEquals(42, calculator.sum("42"))
+        Assert.assertEquals(42, stringCalculator.sum("42"))
     }
 
     @Test
     fun testThatTwoCommaSeparatedNumbersReturnsTheirSum() {
-        val calculator = StringCalculator()
-        Assert.assertEquals(84, calculator.sum("42,42"))
+        Assert.assertEquals(84, stringCalculator.sum("42,42"))
     }
 
     @Test
     fun testThatTwoNewlineSeparatedNumbersReturnsTheirSum() {
-        val calculator = StringCalculator()
-        Assert.assertEquals(84, calculator.sum("42\n42"))
+        Assert.assertEquals(84, stringCalculator.sum("42\n42"))
     }
 
     @Test
     fun testThatThreeNumbersSeparatedEitherWayReturnsTheirSum() {
-        val calculator = StringCalculator()
-        Assert.assertEquals(126, calculator.sum("42,42\n42"))
+        Assert.assertEquals(126, stringCalculator.sum("42,42\n42"))
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun testThatNegativeNumbersThrowException() {
-        val calculator = StringCalculator()
-        calculator.sum("-42")
+        stringCalculator.sum("-42")
+    }
+
+    @Test
+    fun testThatNumbersGreaterThan1000AreIgnored() {
+        Assert.assertEquals(42, stringCalculator.sum("1001\n42"))
+    }
+
+
+    @Test
+    fun testSingleCharDelimiterFirstLine() {
+        Assert.assertEquals(42, stringCalculator.sum("//#\n41#1"))
     }
 }
