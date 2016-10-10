@@ -12,16 +12,26 @@ private fun checkPositiveNumber(s: Int): Int {
     }
 }
 
-private fun extractDelimiter(input: String): Pair<String, String> {
-    return when {
-        input.startsWith("//[") -> {
-            val endBracket = input.indexOf("]")
-            Pair(input.substring(3, endBracket), input.substring(endBracket + 2))
+private fun extractDelimiter(input: String): Pair<List<String>, String> {
+    if (input.startsWith("//")) {
+        val firstLine = input.substring(2, input.indexOf("\n"))
+        val delimiterList = firstLine.split("][").map{d ->
+            d.replace("[", "").replace("]", "")
         }
-        input.startsWith("//") ->
-            Pair(input.substring(2, 3), input.substring(4))
-        else -> Pair(",", input)
+        return Pair(delimiterList, input)
+    } else {
+        return Pair(listOf(","), input)
     }
+//
+//    return when {
+//        input.startsWith("//[") -> {
+//            val endBracket = input.indexOf("]")
+//            Pair(input.substring(3, endBracket), input.substring(endBracket + 2))
+//        }
+//        input.startsWith("//") ->
+//            Pair(input.substring(2, 3), input.substring(4))
+//        else -> Pair(",", input)
+//    }
 }
 
 
@@ -31,7 +41,7 @@ class StringCalculator {
             return 0
         else {
             val (separator, numberString) = extractDelimiter(input)
-            return numberString.split("\n").flatMap { it.split(separator) }
+            return numberString.split("\n").flatMap { it.split(*separator) }
                     .map (Integer::parseInt)
                     .map(::checkPositiveNumber)
                     .filter { it <= 1000 }

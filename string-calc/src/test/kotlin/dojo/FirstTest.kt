@@ -62,6 +62,12 @@ class FirstTest {
         Assert.assertEquals(42, stringCalculator.sum("//[###]\n41###1"))
     }
 
+
+    @Test
+    fun testSingleMultiCharsDelimiterBlocksFirstLine() {
+        Assert.assertEquals(83, stringCalculator.sum("//[###][&&&]\n41###41&&&1"))
+    }
+
     //@Test
     fun testSingleMultiCharsDelimiterFirstLineFoo() {
         //FIXME
