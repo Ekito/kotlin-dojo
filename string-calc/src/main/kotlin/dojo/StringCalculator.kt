@@ -32,12 +32,10 @@ class StringCalculator {
         else {
             val (separator, numberString) = extractDelimiter(input)
             return numberString.split("\n").flatMap { it.split(separator) }
-                    .map (Integer::parseInt)
+                    .map(Integer::parseInt)
                     .map(::checkPositiveNumber)
                     .filter { it <= 1000 }
                     .sum()
         }
     }
-
-
 }
